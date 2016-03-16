@@ -100,6 +100,20 @@ function createPlatforms(){
 			
 			//Atualiza a altura da proxima linha de plataformas
 			height += colsHeight;
+			
+		break;
+		
+		default:
+		
+			if(createPlatformLineLvl3(height) <= 0) linesWithoutPlatform++;
+			else linesWithoutPlatform = 0;
+			
+			//Caso estrapole a altura maxima sem plataformas, cria uma aleatoriamente
+			if(linesWithoutPlatform >= maxLinesWithoutPlatform)
+				createOnePlatform(height, 0.2, 0.6);
+			
+			//Atualiza a altura da proxima linha de plataformas
+			height += colsHeight;
 		break;
 	}
 	

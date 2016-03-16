@@ -3,6 +3,9 @@
 //Transform do personagem
 var player: Transform;
 
+//Transform das serras
+var saws: Transform;
+
 //Posiçao relativa da camera ao personagem
 var cameraPosition: float;
 
@@ -24,8 +27,12 @@ private var dificult: int = 0;
 //Alta maxima alcançada pelo jogador
 private var playerMaxHeight: float;
 
+//Flag que indica quando as serras estaram proximas ao jogador
+private var sawsNearToPlayer: boolean;
+
 function Start(){
 	playerMaxHeight = 0;
+	sawsNearToPlayer = false;
 }
 
 function Update () {
@@ -37,11 +44,16 @@ function Update () {
 	}
 	
 	//Atualiza a posiçao da camera em relaçao ao personagem
-	if(playerMaxHeight + cameraPosition > transform.position.y)
-		Camera.main.transform.position.y = playerMaxHeight + cameraPosition;
+	if(player.transform.position.y + cameraPosition > Camera.main.transform.position.y)
+		Camera.main.transform.position.y = player.transform.position.y + cameraPosition;
+	else if(player.transform.position.y - cameraPosition < Camera.main.transform.position.y)
+		Camera.main.transform.position.y = player.transform.position.y - cameraPosition;
 	
 	//Atualiza a dificuldade
 	this.updateDificult();
+	
+	//Detecta se as serras estão proximas ao jogador
+	this.detectSawNearPlayer();
 }
 
 function OnGUI(){
@@ -62,7 +74,23 @@ function updateDificult(){
 	if(score >= dificultTable[dificult]){
 		dificult++;
 		Debug.Log("Dificuldade: "+dificult);
+		this.saws.SendMessage("setDificult", dificult);
 		this.gameObject.SendMessage("setDificult", dificult);
+	}
+}
+
+/**
+ * Funçao que detecta se as serras estão proximas ou dentro da tela e do jogador
+ */
+function detectSawNearPlayer(){
+	
+	//Verifica se as serras estão dentro ou proximas da tela
+	var near:boolean = this.saws.position.y >= Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y - 1;
+	
+	//Informa o controlador das serras apenas se a flag mudar
+	if(this.sawsNearToPlayer != near){
+		this.sawsNearToPlayer = near;
+		this.saws.SendMessage("setNearToPlayer", near);
 	}
 }
 
