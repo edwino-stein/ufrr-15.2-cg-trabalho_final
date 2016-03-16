@@ -54,6 +54,11 @@ function OnTriggerEnter2D(col : Collider2D) {
 		//Informa ao GameMaster a morte do jogador
 		GameObject.Find("GM").SendMessage("playerDied");
 	}
+	
+	//Destroi se for um tronco
+	if(col.tag == "Bole"){
+		GameObject.Destroy(col.gameObject);
+	}
 }
 
 function OnTriggerExit2D(col : Collider2D){
