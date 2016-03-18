@@ -268,6 +268,9 @@ function createPlatformLineLvl1(y: float){
  */
 function createPlatformLineLvl0(y: float){
 	
+	//Define a altura da area segura do jogador
+	var playerSafeZone:boolean = y >= 3.5 && y <= 5.8;
+	
 	var platform: PlatformAdapter;
 	var position: Vector3;
 	var lastCol: int = 0;
@@ -277,6 +280,12 @@ function createPlatformLineLvl0(y: float){
 	platform = this.platform3;
 	
 	for(var i:int = 1; i <= cols; i++){
+		
+		//Não cria nenhuma plataforma na area segura do jogador
+		if(playerSafeZone && i + platform.max >= 5 && i <= 10){
+			lastCol = 10;
+	 		continue;
+		}
 		
 		//Requesitos para a criaçao da plataforma
 		if(i + platform.max > cols) break;				//Nao estrapolar o tamanho maximo da tela
