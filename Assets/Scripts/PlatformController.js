@@ -493,9 +493,11 @@ function drawBranch(platform: Transform){
 	var b1Width: float;
 	var j: float;
 	
+	var z: float = 10;
+	
 	var position: Vector3 = platform.position;
 	var y: float = position.y - 0.3f;
-    var lastBranch: GameObject = Instantiate(this.branch2, new Vector3(position.x, y, position.z + 1), platform.rotation);
+    var lastBranch: GameObject = Instantiate(this.branch2, new Vector3(position.x, y, z), platform.rotation);
     
     var width: float = lastBranch.GetComponent(Renderer).bounds.extents.x;
     var x: float = lastBranch.transform.position.x;
@@ -504,11 +506,11 @@ function drawBranch(platform: Transform){
 	    b1Width = this.branch1.GetComponent(Renderer).bounds.extents.x;
 
 	    for(j = x - width - b1Width; j >= 0.8f; j = j - b1Width*2) {
-	        lastBranch = Instantiate(this.branch1, new Vector3(j, y, position.z + 1), platform.rotation);
+	        lastBranch = Instantiate(this.branch1, new Vector3(j, y, z), platform.rotation);
 	    }
 	    width = this.branch0.GetComponent(Renderer).bounds.extents.x;
 	    x = lastBranch.transform.position.x - lastBranch.GetComponent(Renderer).bounds.extents.x - width;
-	    Instantiate(this.branch0, new Vector3(x, y, position.z + 1), platform.rotation);
+	    Instantiate(this.branch0, new Vector3(x, y, z), platform.rotation);
 	}
 
 	else if (platform.position.x <= -0.8f) {
@@ -519,14 +521,15 @@ function drawBranch(platform: Transform){
 	    b1Width = this.branch1.GetComponent(Renderer).bounds.extents.x;
 
 	    for(j = x + width + b1Width; j <= -0.8f; j = j + b1Width*2) {
-	        lastBranch = Instantiate(this.branch1, new Vector3(j, y, position.z + 1), platform.rotation);
+	        lastBranch = Instantiate(this.branch1, new Vector3(j, y, z), platform.rotation);
 	        // Inverte os galhos do meio
 			scale = lastBranch.transform.localScale;
 		    lastBranch.transform.localScale = Vector3(-scale.x, scale.y, scale.z);
 	    }
+	    
 	    width = this.branch0.GetComponent(Renderer).bounds.extents.x;
 	    x = lastBranch.transform.position.x + lastBranch.GetComponent(Renderer).bounds.extents.x + width;
-	    lastBranch = Instantiate(this.branch0, new Vector3(x, y, position.z + 1), platform.rotation);
+	    lastBranch = Instantiate(this.branch0, new Vector3(x, y, z), platform.rotation);
 	    // Inverte a raiz do galho
 		scale = lastBranch.transform.localScale;
 	    lastBranch.transform.localScale = Vector3(-scale.x, scale.y, scale.z);
