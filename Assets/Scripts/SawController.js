@@ -15,6 +15,9 @@ var maxSpeedByDificult:float = 0.05;
 //Velocidade atual
 var speed:float;
 
+// Distancia máxima da camera
+var maxDistance: float = 12;
+
 //Flag que indica quando as serras estaram proximas ao jogador
 private var nearToPlayer:boolean = false;
 
@@ -41,6 +44,10 @@ function Update () {
 	}
 
 	this.transform.position.y += this.speed;
+	
+	if (this.getMachineTopY() < this.getMinY()) {
+		this.transform.position.y = this.getMinY();
+	}
 }
 
 
@@ -89,4 +96,15 @@ function setDificult(dificult:int){
  */
 function setNearToPlayer(nearToPlayer:boolean){
 	this.nearToPlayer = nearToPlayer;
+}
+
+function getMachineTopY() {
+	return this.transform.position.y + this.GetComponent(BoxCollider2D).bounds.extents.y;
+}
+
+function getMinY(){
+	var camera: Camera = GameObject.FindWithTag("MainCamera").GetComponent(Camera);
+	var min: float = camera.ViewportToWorldPoint(new Vector3(0.5, 0, 0.5)).y;
+	Debug.LogFormat("min: {0}, maxDistance: {1}, total: {2}", min, this.maxDistance, min-this.maxDistance);
+	return min - this.maxDistance;
 }
