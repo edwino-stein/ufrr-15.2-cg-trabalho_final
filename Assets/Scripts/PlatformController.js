@@ -493,7 +493,7 @@ function drawBranch(platform: Transform){
 	var b1Width: float;
 	var j: float;
 	
-	var z: float = 10;
+	var z: float = this.branch0.transform.position.z;
 	
 	var position: Vector3 = platform.position;
 	var y: float = position.y - 0.3f;
