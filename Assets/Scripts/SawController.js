@@ -76,7 +76,7 @@ function OnTriggerExit2D(col : Collider2D){
 function setDificult(dificult:int){
 	this.dificult = dificult;
 	
-	this.speedByDificult = speedBase + acceleration*((dificult*1.0f)/65);
+	this.speedByDificult = speedBase + acceleration*((dificult*1.0f)/100);
 	
 	//Limita a velocidade
 	if(this.speedByDificult > this.maxSpeedByDificult){
