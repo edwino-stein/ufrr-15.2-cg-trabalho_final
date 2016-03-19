@@ -13,7 +13,7 @@ var maxSpeedNearToPlayer:float = 0.033;
 var maxSpeedByDificult:float = 0.05;
 
 //Velocidade atual
-private var speed:float;
+var speed:float;
 
 //Flag que indica quando as serras estaram proximas ao jogador
 private var nearToPlayer:boolean = false;
@@ -76,7 +76,7 @@ function OnTriggerExit2D(col : Collider2D){
 function setDificult(dificult:int){
 	this.dificult = dificult;
 	
-	this.speedByDificult = speedBase + acceleration*((dificult*1.0f)/100);
+	this.speedByDificult = speedBase + acceleration*((dificult*1.0f)/65);
 	
 	//Limita a velocidade
 	if(this.speedByDificult > this.maxSpeedByDificult){

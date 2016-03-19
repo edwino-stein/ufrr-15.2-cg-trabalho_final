@@ -103,22 +103,119 @@ function createPlatforms(){
 			
 		break;
 		
-		default:
+		case 4:
 		
-			if(createPlatformLineLvl3(height) <= 0) linesWithoutPlatform++;
+			if(createPlatformLineLvl4(height) <= 0) linesWithoutPlatform++;
 			else linesWithoutPlatform = 0;
 			
 			//Caso estrapole a altura maxima sem plataformas, cria uma aleatoriamente
 			if(linesWithoutPlatform >= maxLinesWithoutPlatform)
-				createOnePlatform(height, 0.2, 0.6);
+				createOnePlatform(height, 0.1, 0.6);
 			
 			//Atualiza a altura da proxima linha de plataformas
 			height += colsHeight;
+			
+		break;
+		
+		case 5:
+		
+			if(createPlatformLineLvl5(height) <= 0){
+				linesWithoutPlatform++;
+			}
+			else{
+				linesWithoutPlatform = 1;
+				height += colsHeight;
+			}
+			
+			//Caso estrapole a altura maxima sem plataformas, cria uma aleatoriamente
+			if(linesWithoutPlatform >= maxLinesWithoutPlatform)
+				createOnePlatform(height, 0, 0.6);
+			
+			//Atualiza a altura da proxima linha de plataformas
+			height += colsHeight;
+			
+		break;
+		
+		case 6:
+			
+			if(linesWithoutPlatform < maxLinesWithoutPlatform - Mathf.Round(Random.Range(0f, 1f))){
+				linesWithoutPlatform++;
+			}
+			else{
+				createOnePlatformOnCenter(height, 0, 0.6);
+				linesWithoutPlatform = 0;
+			}
+			
+			//Atualiza a altura da proxima linha de plataformas
+			height += colsHeight;
+			
+		break;
+		
+		case 7:
+			
+			if(linesWithoutPlatform < maxLinesWithoutPlatform - Mathf.Round(Random.Range(0f, 1f))){
+				linesWithoutPlatform++;
+			}
+			else{
+				createOnePlatformOnCenter(height, 0, 0.3);
+				linesWithoutPlatform = 0;
+			}
+			
+			//Atualiza a altura da proxima linha de plataformas
+			height += colsHeight;
+			
+		break;
+		
+		default:
+		
+			if(linesWithoutPlatform < maxLinesWithoutPlatform){
+				linesWithoutPlatform++;
+			}
+			else{
+				createOnePlatformOnCenter(height, 0, 0);
+				linesWithoutPlatform = 0;
+			}
+			
+			//Atualiza a altura da proxima linha de plataformas
+			height += colsHeight;
+			
 		break;
 	}
 	
 }
 
+/**
+ * Funçao com o mesmo objeto de createOnePlatform, porem com maior possibilidade
+ * de criar as plataformas mais ao centro.
+ */
+
+function createOnePlatformOnCenter(y:float, p3:float, p2:float){
+	
+	var platform: PlatformAdapter = null;
+	var position: Vector3;
+	var random:float;
+	var i:int;
+	
+	random = Random.Range(0f, 1f);
+	if(random < p3) platform = this.platform3;
+	else if(random > p3 && random < p2) platform = this.platform2;
+	else platform = this.platform1;
+	
+	if(random <= 0.2f){
+		i = Mathf.Round(Random.Range(1f, 4f));
+	}
+	else if(random > 0.2f && random <= 0.6f){
+		i = Mathf.Round(Random.Range(5f, 10f));
+	}
+	else{
+		i = Mathf.Round(Random.Range(11f, cols));
+	}
+	
+	position = new Vector3(platform.getPivotX(getPositionByCol(i)), y, 0f);
+	Instantiate(platform.transform, position, platform.transform.rotation);
+		
+	return 1;
+}
 
 /**
  * Cria uma plataforma aleatoriamente na linha Y.
@@ -130,17 +227,98 @@ function createOnePlatform(y:float, p3:float, p2:float){
 	var platform: PlatformAdapter = null;
 	var position: Vector3;
 	var random:float;
-	var i:int = Mathf.Round(Random.Range(1f, cols));
 	
 	random = Random.Range(0f, 1f);
 	if(random < p3) platform = this.platform3;
 	else if(random > p3 && random < p2) platform = this.platform2;
 	else platform = this.platform1;
 	
+	var i:int = Mathf.Round(Random.Range(1f, cols));
+
 	position = new Vector3(platform.getPivotX(getPositionByCol(i)), y, 0f);
 	Instantiate(platform.transform, position, platform.transform.rotation);
 		
 	return 1;
+}
+
+/**
+ * Cria linhas de plataforma de dificulade 4 na altura Y.
+ */
+function createPlatformLineLvl5(y: float){
+	
+	var platform: PlatformAdapter = null;
+	var position: Vector3;
+	var lastCol: int = 0;
+	var count: int = 0;
+	
+	for(var i:int = 1; i <= cols; i++){
+		
+		//Escolhe o tamanho da plataforma
+		if(platform == null){
+			platform = Random.Range(0f, 1f) <= 0.6f ? this.platform2 : this.platform1;
+		}
+		
+		//Requesitos para a criaçao da plataforma
+		if(i + platform.max > cols) break; 				//Nao estrapolar o tamanho maximo da tela
+		if(i - platform.min - lastCol <= 3) continue;	//Nao ficar grudada ou encima de da ultima plataforma
+		if(Random.Range(0f, 1f) >= 0.05f) continue;		//Chance de criaçao da plataforma naquela coluna
+		
+		//Calcula a posiçao da plataforma na linha e cria um clone de seu prefab
+		position = new Vector3(platform.getPivotX(getPositionByCol(i)), y, 0f);
+		Instantiate(platform.transform, position, platform.transform.rotation);
+		
+		//Atualiza a posiçao da ultima plataforma e incrmenta o contador
+		lastCol = i + platform.max;
+		count++;
+		
+		//Reseta o sorteio de tamanho de plataformas
+		platform = null;
+	}
+	
+	//Retorna o numero de plataformas criadas
+	return count;
+}
+
+/**
+ * Cria linhas de plataforma de dificulade 4 na altura Y.
+ */
+function createPlatformLineLvl4(y: float){
+	
+	var platform: PlatformAdapter = null;
+	var random:float;
+	var position: Vector3;
+	var lastCol: int = 0;
+	var count: int = 0;
+	
+	for(var i:int = 1; i <= cols; i++){
+		
+		//Escolhe o tamanho da plataforma
+		if(platform == null){
+			random = Random.Range(0f, 1f);
+			if(random <= 0.1f) platform = this.platform3;
+			else if(random > 0.1f && random <= 0.4f) platform = this.platform1;
+			else platform = this.platform2;		
+		}
+		
+		//Requesitos para a criaçao da plataforma
+		if(i + platform.max > cols) break; 				//Nao estrapolar o tamanho maximo da tela
+		if(i - platform.min - lastCol <= 3) continue;	//Nao ficar grudada ou encima de da ultima plataforma
+		if(Random.Range(0f, 1f) >= 0.06f) continue;		//Chance de criaçao da plataforma naquela coluna
+		
+		//Calcula a posiçao da plataforma na linha e cria um clone de seu prefab
+		position = new Vector3(platform.getPivotX(getPositionByCol(i)), y, 0f);
+		Instantiate(platform.transform, position, platform.transform.rotation);
+		
+		//Atualiza a posiçao da ultima plataforma e incrmenta o contador
+		lastCol = i + platform.max;
+		count++;
+		
+		//Reseta o sorteio de tamanho de plataformas
+		platform = null;
+	}
+	
+	//Retorna o numero de plataformas criadas
+	return count;
 }
 
 /**
