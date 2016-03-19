@@ -33,6 +33,7 @@ private var sawsNearToPlayer: boolean;
 function Start(){
 	playerMaxHeight = 0;
 	sawsNearToPlayer = false;
+	Screen.sleepTimeout = SleepTimeout.NeverSleep;
 }
 
 function Update () {
@@ -59,7 +60,7 @@ function Update () {
 function OnGUI(){
 	//Define a GUI
 	GUI.skin = this.GuiSkin;
-	GUI.Label(new Rect(Screen.width/2, 5, 100, 100), "" + this.score);
+	GUI.Label(new Rect(Screen.width/2 - 25, 5, 500, 500), "" + this.score);
 }
 
 /**
@@ -99,4 +100,8 @@ function detectSawNearPlayer(){
  */
 function playerDied(){
 	Debug.Log("E morreu 2");
+	
+	//(Temporario)Espera 3 segundos e reinicia a cena
+	yield WaitForSeconds(3);
+	Application.LoadLevel(Application.loadedLevel);
 }
