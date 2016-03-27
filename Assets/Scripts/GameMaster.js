@@ -35,6 +35,8 @@ private var playerMaxHeight: float;
 //Flag que indica quando as serras estaram proximas ao jogador
 private var sawsNearToPlayer: boolean;
 
+private var isPaused: boolean;
+
 function Start(){
 	playerMaxHeight = 0;
 	sawsNearToPlayer = false;
@@ -43,6 +45,14 @@ function Start(){
 }
 
 function Update () {
+	//Detecta pause
+	if(Input.GetKeyUp(KeyCode.Escape)) {
+		isPaused = !isPaused;
+		if(isPaused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+	}
 	
 	//Atualiza o score sempre que jogador conseguir ultrapassar sua ultima altura maxima
 	if(player.position.y > playerMaxHeight){

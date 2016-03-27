@@ -43,7 +43,7 @@ function Update () {
 		this.speed = this.speedByDificult;
 	}
 
-	this.transform.position.y += this.speed;
+	this.transform.position.y += this.speed * Time.timeScale;
 	
 	if (this.getMachineTopY() < this.getMinY()) {
 		this.transform.position.y = this.getMinY();
