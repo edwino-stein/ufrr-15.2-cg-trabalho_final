@@ -18,8 +18,13 @@ var dificultTable: int[];
 //Skin da GUI
 var GuiSkin: GUISkin;
 
+private final var PREF_SCORE: String = "HiScore";
+
 //Score atual
 private var score: int;
+
+//Score recorde
+private var hiScore:int;
 
 //Indice de dificuldade atual
 private var dificult: int = 0;
@@ -34,6 +39,7 @@ function Start(){
 	playerMaxHeight = 0;
 	sawsNearToPlayer = false;
 	Screen.sleepTimeout = SleepTimeout.NeverSleep;
+	getHiScore();
 }
 
 function Update () {
@@ -42,6 +48,8 @@ function Update () {
 	if(player.position.y > playerMaxHeight){
 		playerMaxHeight = player.position.y;
 		score = playerMaxHeight * scoreMult;
+		if(score > hiScore)
+			setHiScore(score);
 	}
 	
 	//Atualiza a posiçao da camera em relaçao ao personagem
@@ -60,7 +68,28 @@ function Update () {
 function OnGUI(){
 	//Define a GUI
 	GUI.skin = this.GuiSkin;
-	GUI.Label(new Rect(Screen.width/2 - 25, 5, 500, 500), "" + this.score);
+	var scoreStyle: GUIStyle = GUIStyle(GUI.skin.label);
+	scoreStyle.fontSize = 24;
+	scoreStyle.alignment = TextAnchor.MiddleCenter;
+
+	GUI.Label(new Rect(0, 0, Screen.width, 30), "" + this.score, scoreStyle);
+	
+	var hiStyle: GUIStyle = GUIStyle(GUI.skin.label);
+	hiStyle.fontSize = 12;
+	hiStyle.alignment = TextAnchor.MiddleLeft;
+	GUI.Label(new Rect(10, 0, Screen.width, 30), "MAX: " + this.hiScore, hiStyle);
+}
+
+function getHiScore(){
+	if (!PlayerPrefs.HasKey(this.PREF_SCORE))
+		setHiScore(0);
+	this.hiScore = PlayerPrefs.GetInt(this.PREF_SCORE, 0);
+}
+
+function setHiScore(score: int){
+	this.hiScore = score;
+	PlayerPrefs.SetInt(this.PREF_SCORE, score);
+	PlayerPrefs.Save();
 }
 
 /**
