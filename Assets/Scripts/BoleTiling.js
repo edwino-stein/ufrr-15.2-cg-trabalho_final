@@ -15,7 +15,7 @@ private var cameraHeight:float;
 function Start () {
 	this.cameraHeight = (Camera.main.orthographicSize * 2) + 1;
 	this.spriteHeight = this.sprite.GetComponent.<SpriteRenderer>().sprite.bounds.size.y;
-	this.top = this.sprite.position.y + this.spriteHeight*(1.49);
+	this.top = this.sprite.position.y + this.spriteHeight;
 }
 
 function Update () {
