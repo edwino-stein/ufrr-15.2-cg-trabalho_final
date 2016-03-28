@@ -79,15 +79,15 @@ function OnGUI(){
 	//Define a GUI
 	GUI.skin = this.GuiSkin;
 	var scoreStyle: GUIStyle = GUIStyle(GUI.skin.label);
-	scoreStyle.fontSize = 0.05 * Screen.height;
+	scoreStyle.fontSize = 0.025 * Screen.height;
 	scoreStyle.alignment = TextAnchor.MiddleCenter;
 
 	GUI.Label(new Rect(0, 0, Screen.width, 0.05 * Screen.height), "" + this.score, scoreStyle);
 	
 	var hiStyle: GUIStyle = GUIStyle(GUI.skin.label);
-	hiStyle.fontSize = 0.025 * Screen.height;
+	hiStyle.fontSize = 0.020 * Screen.height;
 	hiStyle.alignment = TextAnchor.MiddleLeft;
-	GUI.Label(new Rect(0.05 * Screen.width, 0, Screen.width, 0.05 * Screen.height), "MAX: " + this.hiScore, hiStyle);
+	GUI.Label(new Rect(0.05 * Screen.width, 0, Screen.width, 0.05 * Screen.height), "Recorde: " + this.hiScore, hiStyle);
 }
 
 function getHiScore(){
