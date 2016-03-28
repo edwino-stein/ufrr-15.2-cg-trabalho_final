@@ -105,6 +105,6 @@ function getMachineTopY() {
 function getMinY(){
 	var camera: Camera = GameObject.FindWithTag("MainCamera").GetComponent(Camera);
 	var min: float = camera.ViewportToWorldPoint(new Vector3(0.5, 0, 0.5)).y;
-	Debug.LogFormat("min: {0}, maxDistance: {1}, total: {2}", min, this.maxDistance, min-this.maxDistance);
+	//Debug.LogFormat("min: {0}, maxDistance: {1}, total: {2}", min, this.maxDistance, min-this.maxDistance);
 	return min - this.maxDistance;
 }
