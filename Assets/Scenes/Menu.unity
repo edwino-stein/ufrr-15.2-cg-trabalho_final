@@ -148,6 +148,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 155201722}
   - 114: {fileID: 155201721}
+  - 114: {fileID: 155201723}
   m_Layer: 0
   m_Name: MenuControl
   m_TagString: Untagged
@@ -178,6 +179,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &155201723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 155201720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbe322f423b54185a03dc5887d977ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTexture: {fileID: 2800000, guid: 80312fca28121435896632b11ff910ac, type: 3}
+  fadeSpeed: .800000012
 --- !u!1 &204411289
 GameObject:
   m_ObjectHideFlags: 0

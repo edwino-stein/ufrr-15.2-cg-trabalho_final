@@ -140,7 +140,11 @@ function detectSawNearPlayer(){
 function playerDied(){
 	Debug.Log("E morreu 2");
 	
-	//(Temporario)Espera 3 segundos e reinicia a cena
-	yield WaitForSeconds(3);
+	//Espera 1 segundo e faz um fadeout
+	yield WaitForSeconds(1);
+	GameObject.Find("GM").GetComponent.<Fading>().beginFade(1);
+	
+	//(Temporario)Espera 2 segundos e reinicia a cena
+	yield WaitForSeconds(2);
 	Application.LoadLevel(Application.loadedLevel);
 }

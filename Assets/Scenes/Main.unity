@@ -267,6 +267,7 @@ GameObject:
   - 114: {fileID: 431677894}
   - 114: {fileID: 431677896}
   - 114: {fileID: 431677897}
+  - 114: {fileID: 431677898}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -349,6 +350,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 484588, guid: 459778abe75e8934aab06f3f4d25fefa, type: 2}
+--- !u!114 &431677898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431677893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbe322f423b54185a03dc5887d977ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTexture: {fileID: 2800000, guid: 80312fca28121435896632b11ff910ac, type: 3}
+  fadeSpeed: .800000012
 --- !u!1 &457528744
 GameObject:
   m_ObjectHideFlags: 0
