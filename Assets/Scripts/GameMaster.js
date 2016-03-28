@@ -45,14 +45,6 @@ function Start(){
 }
 
 function Update () {
-	//Detecta pause
-	if(Input.GetKeyUp(KeyCode.Escape)) {
-		isPaused = !isPaused;
-		if(isPaused)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
-	}
 	
 	//Atualiza o score sempre que jogador conseguir ultrapassar sua ultima altura maxima
 	if(player.position.y > playerMaxHeight){
