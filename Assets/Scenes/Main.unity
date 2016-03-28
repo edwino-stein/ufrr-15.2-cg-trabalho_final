@@ -1535,7 +1535,7 @@ Transform:
   - {fileID: 832379519}
   - {fileID: 1738299458}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &1605793111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,10 +1698,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 281230812}
   m_RootOrder: 1
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30, y: -120}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: .5, y: .962517083}
+  m_AnchorMax: {x: .5, y: .962517083}
+  m_AnchoredPosition: {x: 361, y: -26}
+  m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 1, y: 0}
 --- !u!95 &1647238106
 Animator:
