@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: 3aba2af6b798bf245a25190ee50b76b1
-timeCreated: 1459132518
+timeCreated: 1459392069
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Playpause_0
     21300002: Playpause_1
+    21300004: Playpause_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -66,6 +67,16 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Playpause_2
+      rect:
+        serializedVersion: 2
+        x: 1024
         y: 0
         width: 512
         height: 512
