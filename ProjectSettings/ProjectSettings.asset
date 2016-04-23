@@ -85,7 +85,7 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 1
-  bundleIdentifier: org.stein.edwino.Teste
+  bundleIdentifier: org.stein.edwino.caicaipassarinho
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
